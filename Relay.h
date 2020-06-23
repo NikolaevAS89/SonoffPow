@@ -3,7 +3,7 @@
 
 #include <arduino.h>
 
-#ifndef
+#ifndef PIN_RELAY
 #define PIN_RELAY 12
 #endif
 

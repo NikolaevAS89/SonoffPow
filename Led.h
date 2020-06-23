@@ -13,7 +13,7 @@ class Led {
         Led(uint8_t pin=PIN_LED);
         void turnOff();
         void turnOn();
-        void blink(uint8_t frequency_mask, bool looped);
+        void blink(uint8_t frequency_mask, bool looped=true);
         void blinkOnce(uint8_t frequency_mask);
         void loop();
     private:
