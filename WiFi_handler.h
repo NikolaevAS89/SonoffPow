@@ -6,16 +6,7 @@
 
 extern bool isDebug;
 
-typedef struct {
-	String vSSID;
-	String vRSSI;
-	char vEncryptionType;
-} SSID;
-
-static SSID WIFI_NOT_FOUND[0];
-
 void WiFi_begin(void);
 bool WiFi_CreateAP(char* ssid, char* pass);
 bool WiFi_ConnectToAP(char* ssid, char* pass);
-SSID* WiFi_list(void);
 #endif

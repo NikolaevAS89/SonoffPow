@@ -10,10 +10,13 @@
 class Relay {
     public:
         Relay(uint8_t pin=PIN_RELAY);
+        bool isOn();
+        void turn();
         void turnOff();
         void turnOn();
     private:
         uint8_t pin;
+        bool isOff;
 };
 
 #endif

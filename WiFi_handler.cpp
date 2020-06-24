@@ -72,24 +72,3 @@ bool WiFi_ConnectToAP(char* ssid, char* pass) {
   Serial.print("Connect WiFi failed ...\n");
   return false;
 }
-
-/**
- * Найти список WiFi сетей
- */
-SSID* WiFi_list(void){
-  if(isDebug){
-    Serial.print("WiFi_list()\n");
-  }
-  int n = WiFi.scanNetworks();
-  if( n <= 0 ){
-    return WIFI_NOT_FOUND;
-  } else {
-    SSID* finded = new SSID[n];
-    for (int i=0; i<n; i++){
-      finded[i].vSSID=WiFi.SSID(i);
-      finded[i].vRSSI=WiFi.RSSI(i);
-      finded[i].vEncryptionType=(WiFi.encryptionType(i) == ENC_TYPE_NONE)?' ':'*';
-    }
-    return finded;
-  }
-}

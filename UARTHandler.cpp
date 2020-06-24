@@ -3,6 +3,7 @@
 UARTHandler::UARTHandler() {
   Serial.begin(9600);
 	this->listeners = NULL;
+  this->defaultListener = NULL;
 	this->idx = 0;
 }
 
@@ -13,6 +14,10 @@ UARTHandler::~UARTHandler() {
     delete p;
   }
   Serial.end();
+}
+
+void UARTHandler::addDefaultListener( void(*listener)(char, char*)) {
+  this->defaultListener = listener;
 }
 
 void UARTHandler::loop() {
@@ -44,8 +49,11 @@ void UARTHandler::fireEvent(char pcode, char* pdata) {
   while(p != NULL) {
   	if(p->code == pcode){
   		p->listener(pdata);
-  		break;
+  		return;
   	}
     p = this->listeners->prev;
+  }
+  if(this->defaultListener != NULL) {
+    this->defaultListener(pcode, pdata);
   }
 }
