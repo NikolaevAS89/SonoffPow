@@ -1,8 +1,5 @@
 #include "HTTP_server.h"
 
-ESP8266WebServer server(80);
-ESP8266HTTPUpdateServer httpUpdater;
-
 void HTTP_begin(void){
     if(isDebug) {
         Serial.print("WiFi_begin()\n");
