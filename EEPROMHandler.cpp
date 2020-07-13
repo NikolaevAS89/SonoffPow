@@ -166,4 +166,3 @@ uint16_t EEPROMHandler::ecsrc(void) {
    this->config->ecsrc = ecsrc;
    return src;  
 }
-

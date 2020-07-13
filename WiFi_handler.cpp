@@ -19,6 +19,7 @@ bool WiFiHandler::WiFiSwitchMode(void) {
     }
     this->WiFiShutdown();
     if(WiFi.getMode() == WIFI_AP) {
+        Serial.print("Try connect to access point\n");
         if( this->WiFiConnectToAP() ) {
             Serial.print("Connected to access point\n");
             return true;
@@ -57,9 +58,9 @@ bool WiFiHandler::WiFiCreateAP(void) {
   Serial.print("\n");
   Serial.print(pass);
   Serial.print("\n");
-  IPAddress localIP(192,168,1,1); //TODO
-  IPAddress gateway(192,168,0,1); //TODO
-  IPAddress subnet(255,255,255,0); //TODO
+  IPAddress localIP(192,168,1,1); //TODO set from eeprom
+  IPAddress gateway(192,168,0,1); //TODO set from eeprom
+  IPAddress subnet(255,255,255,0); //TODO set from eeprom
   WiFi.mode(WIFI_AP);
   for ( int j = 0; j < 0; j++ ) {
       delay(WIFI_DELAY_TRY);
@@ -83,6 +84,7 @@ bool WiFiHandler::WiFiConnectToAP(void) {
   char* pass = (char*)this->eeprom->getWifiStPass();
   WiFi.mode(WIFI_STA);
   WiFi.setAutoReconnect(true);
+  WiFi.hostname ("sonoff-pow2"); //TODO set name from eeprom
   WiFi.begin(ssid, pass, 0);
   for ( int j = 0; j < WIFI_CNT_TRY; j++ ) {
     delay(WIFI_DELAY_TRY);

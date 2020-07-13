@@ -55,12 +55,12 @@ public:
 	//
 	EEPROMHandler* setClientUser(char* user, uint8_t length);
 	EEPROMHandler* setClientPass(char* pass, uint8_t length);
+ void byDefault();
 private:
 	SonofPowCofig* config;
 	bool loaded;
 	uint16_t ecsrc();
 	void load();
-	void byDefault();
 };
 
 #endif
