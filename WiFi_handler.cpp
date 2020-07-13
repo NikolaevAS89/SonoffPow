@@ -77,11 +77,10 @@ bool WiFiHandler::WiFiCreateAP(void) {
 
 bool WiFiHandler::WiFiConnectToAP(void) {
   Serial.print("WiFiConnectToAP(void)\n");
-  Serial.print("=====\n");
   Serial.print((char*)this->eeprom->getWifiStSsid());
-  Serial.print("=====\n");
+  Serial.print("\n");
   Serial.print((char*)this->eeprom->getWifiStPass());
-  Serial.print("=====\n");
+  Serial.print("\n");
   if(!this->eeprom->isWifiStValid()) {
     Serial.print("Not valid configuration\n");
     return false;

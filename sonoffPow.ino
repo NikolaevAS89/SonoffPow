@@ -142,10 +142,10 @@ void dataReceive(char code, char* data) {
   switch(code) {
     case 'r': relay->turn(); break;
     case 'd': 
-       Serial.printf("Power:%f", power->getPower());
-       Serial.printf("current:%f", power->getCurrent());
-       Serial.printf("voltage:%f", power->getVoltage());
-       Serial.printf("frequency:%f", power->getCurrFrequency());
+       Serial.printf("Power:%f\n", power->getPower());
+       Serial.printf("current:%f\n", power->getCurrent());
+       Serial.printf("voltage:%f\n", power->getVoltage());
+       Serial.printf("frequency:%f\n", power->getCurrFrequency());
        break;
     case 'w': wifiHandler->WiFiSwitchMode(); break;
     case 'p': 
