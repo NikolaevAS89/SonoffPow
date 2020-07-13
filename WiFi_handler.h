@@ -6,8 +6,8 @@
 
 extern bool isDebug;
 
-#define WIFI_CNT_TRY 5
-#define WIFI_DELAY_TRY 500
+#define WIFI_CNT_TRY 15
+#define WIFI_DELAY_TRY 1000
 
 class WiFiHandler {
 private:

@@ -17,8 +17,9 @@ bool WiFiHandler::WiFiSwitchMode(void) {
     if(isDebug) {
         Serial.print("WiFiSwitchMode()\n");
     }
+    uint8_t mode = WiFi.getMode();
     this->WiFiShutdown();
-    if(WiFi.getMode() == WIFI_AP) {
+    if(mode == WIFI_AP) {
         Serial.print("Try connect to access point\n");
         if( this->WiFiConnectToAP() ) {
             Serial.print("Connected to access point\n");
@@ -75,7 +76,12 @@ bool WiFiHandler::WiFiCreateAP(void) {
 }
 
 bool WiFiHandler::WiFiConnectToAP(void) {
-    Serial.print("WiFiConnectToAP(void)\n");
+  Serial.print("WiFiConnectToAP(void)\n");
+  Serial.print("=====\n");
+  Serial.print((char*)this->eeprom->getWifiStSsid());
+  Serial.print("=====\n");
+  Serial.print((char*)this->eeprom->getWifiStPass());
+  Serial.print("=====\n");
   if(!this->eeprom->isWifiStValid()) {
     Serial.print("Not valid configuration\n");
     return false;
@@ -84,15 +90,17 @@ bool WiFiHandler::WiFiConnectToAP(void) {
   char* pass = (char*)this->eeprom->getWifiStPass();
   WiFi.mode(WIFI_STA);
   WiFi.setAutoReconnect(true);
-  WiFi.hostname ("sonoff-pow2"); //TODO set name from eeprom
   WiFi.begin(ssid, pass, 0);
   for ( int j = 0; j < WIFI_CNT_TRY; j++ ) {
     delay(WIFI_DELAY_TRY);
     if (WiFi.status() == WL_CONNECTED) {
+      Serial.print("=====\n");
       WiFi.printDiag(Serial);
+      Serial.print("=====\n");
       return true;
     }
     Serial.print(WiFi.status());
+    Serial.print("\n");
   }
   Serial.print("Connect WiFi failed ...\n");
   return false;
